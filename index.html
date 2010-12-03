@@ -21,19 +21,12 @@
 	
 	
 	var onmessage = function() {
-		// when a message i pushed to us, do what with the json?
+		// when a message is pushed to us, do what with the json?
 		kroupa.receive_message(function(data) {
-			//alert(data);
-			
-				//if(data) {
-					
-					var temp = $('#results').html()+'<br  />';
-					$('#results').html(temp+data);
-				//} else {
-					
-				//}
-				
-				onmessage();
+
+			var temp = $('#results').html()+'<br  />';
+			$('#results').html(temp+data);
+			onmessage();
 			
 		});
 	}
