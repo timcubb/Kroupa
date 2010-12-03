@@ -18,10 +18,9 @@ var Kroupa = function() {
     },
 
     '/listen' : function(request, response) {
-      response.writeHead(200, {'Content-Type': 'text/javascript'});
-      updateLoop.call(this, request, response);
-	  
-  		sys.puts('listening...');
+	response.writeHead(200, {'Content-Type': 'text/javascript'});
+	updateLoop.call(this, request, response);
+	sys.puts('listening...');
     },
 
     '/post' : function(request, response) {
@@ -32,12 +31,12 @@ var Kroupa = function() {
 				body += data;
 			});
 			request.on('end', function () {
-				var POST = qs.parse(body);
-  		sys.puts('request'+JSON.stringify(POST));
-      response.writeHead(200, {'Content-Type': 'text/plain'});
-	  response.write("1");
-	  messages.push(JSON.stringify(POST));
-      response.end();
+			var POST = qs.parse(body);
+			sys.puts('request'+JSON.stringify(POST));
+			response.writeHead(200, {'Content-Type': 'text/plain'});
+			response.write("1");
+			messages.push(JSON.stringify(POST));
+			response.end();
 			});
 		}
 
@@ -46,11 +45,11 @@ var Kroupa = function() {
 
   var updateLoop = function(request, response) {
     if(messages.length > 0) {
-		var popit = messages.pop();
-      response.write(popit);
-  	  sys.puts('pop:'+popit);
-      response.end();
-      return false;
+	var popit = messages.pop();
+	response.write(popit);
+ 	sys.puts('pop:'+popit);
+	response.end();
+	return false;
     }
     
     setTimeout(function() {
