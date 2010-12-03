@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>Kroupa Example Page</title>
+  </head>
+  
+  <body>
+    <h1>Kroupa example page</h1>
+    <p>Kroupa is still in its earliest of stages. Please use this code at your own risk.</p>
+    <p>The point of this example is that this page connects to the kroupa server, and whenever you click the button below, it bradcasts a message to anyone connected to that server. (hint: try opening a couple bowser windows to this page and clicking the button)<p/>
+    <input type="button" name="broadcast_msg" id="broadcast_msg" value="Test"  />
+    <div id="results">
+    		&nbsp;
+    </div>
+  </body>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="js/kroupa.js"></script>
+
+  <script type="text/javascript">
+
+	var kroupa = new Kroupa('http://127.0.0.1:8000');
+	
+	
+	var onmessage = function() {
+		// when a message i pushed to us, do what with the json?
+		kroupa.receive_message(function(data) {
+			//alert(data);
+			
+				//if(data) {
+					
+					var temp = $('#results').html()+'<br  />';
+					$('#results').html(temp+data);
+				//} else {
+					
+				//}
+				
+				onmessage();
+			
+		});
+	}
+	
+	onmessage();
+	
+	$("#broadcast_msg").click(function() {
+							 
+		// send a json object out to be broadcasted to all clients
+		kroupa.send_message({'message': 'hellloooo world!!'});
+	});
+	
+  </script>
+</html>
+
+
+
+
